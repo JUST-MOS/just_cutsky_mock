@@ -25,8 +25,8 @@ all0.dat
 The fixed Uchuu input schema:
 
 ```text
-halo_mass
-halo_conc
+halo_mass # M200mean
+halo_conc # C200mean
 halo_x
 halo_y
 halo_z
