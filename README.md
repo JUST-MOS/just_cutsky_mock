@@ -1,8 +1,8 @@
-# cutsky_mock
+# JUST CUTSKY MOCK (v1.0)
 
-Generate one specific product: a cutsky galaxy lightcone together with the corresponding host-halo lightcone, using the fixed HOD / quenching / color / luminosity-evolution logic in this repository.
+Generating a cutsky galaxy lightcone together with the corresponding host-halo lightcone.
 
-The final product is a single HDF5 file:
+Resulting in a HDF5 file:
 
 ```text
 mock.h5
@@ -10,9 +10,10 @@ mock.h5
 └── /halos
 ```
 
-Row `i` in `/halos` is the host halo of row `i` in `/galaxies`. A halo is therefore intentionally repeated when several galaxies in the output share the same host.
+Each row in `/halos` matches the same row in `/galaxies`. A halo is therefore intentionally repeated when several galaxies in the output share the same host.
 
-## Input data
+
+# Input data
 
 Only two external scientific inputs are required:
 
@@ -21,7 +22,7 @@ uchuu_catalog.h5
 all0.dat
 ```
 
-The fixed Uchuu input schema is:
+The fixed Uchuu input schema:
 
 ```text
 halo_mass
@@ -35,21 +36,23 @@ halo_vz
 halo_vrms
 ```
 
-`all0.dat` uses the same NYU-VAGC column convention as the reference scripts: redshift in column 3, `Mr` in column 4, `g-r` in column 7, and log stellar mass in column 8.
+`all0.dat` structure: redshift in column 3, `Mr` in column 4, `g-r` in column 7, and log stellar mass in column 8.
 
-There is no dependency on an Uchuu delta/environment file.
 
-## Install
+# Install
 
 ```bash
 pip install -e .
 ```
 
-Dependencies are declared in `pyproject.toml`.
+Dependencies:
 
-## End-to-end test / example
 
-Place the lightweight example files at exactly:
+
+
+# Example fro test
+
+Using the following two small-size files for test:
 
 ```text
 examples/data/uchuu/uchuu_catalog.h5
@@ -62,11 +65,12 @@ Then run:
 python test.py
 ```
 
-A successful run writes `test_mock.h5`. This is the intended end-to-end test; there is no separate test suite.
+A successful run writes `test_mock.h5`.
 
-## Python API
 
-### Center + area
+# Python API
+
+## Center + area
 
 ```python
 from mockgen import MockConfig, SkyRegion, generate_mock
@@ -91,9 +95,10 @@ config = MockConfig(
 generate_mock(config)
 ```
 
-`area_deg2` is interpreted as the area of a spherical cap centered on the requested RA/Dec.
+`area_deg2` is interpreted as the area of a spherical cap centered on the requested RA and Dec center.
 
-### RA/Dec rectangle
+
+## RA/Dec rectangle
 
 ```python
 sky = SkyRegion.rectangle(
@@ -105,6 +110,7 @@ sky = SkyRegion.rectangle(
 ```
 
 RA wrap-around is supported, e.g. `ra_min=350`, `ra_max=10`.
+
 
 ## CLI
 
@@ -137,25 +143,10 @@ make-mock \
   --z-max 1.0
 ```
 
-## Fixed physical model
 
-The public interface does not expose the HOD or evolution parameters. The implementation fixes the values used by the supplied reference code, including:
+# Output schema
 
-- `H0 = 67.74`
-- `Om0 = 0.3089`
-- `h = 0.6774`
-- periodic box size `2000 Mpc/h`
-- stellar-mass HOD threshold `1e8`
-- the supplied Behroozi-style SHMR/scatter prescription
-- the supplied satellite occupation and NFW placement prescription
-- the supplied central/satellite halo-quenching laws used for color assignment
-- the supplied double-Gaussian `g-r` model and halo-mass rank matching
-- the supplied `Mr` regression
-- the supplied RSD, apparent-magnitude, luminosity-evolution, and density-evolution prescriptions
-
-## Output schema
-
-### `/galaxies`
+## `/galaxies`
 
 ```text
 idx
@@ -180,7 +171,7 @@ gr
 
 `type=1` is central and `type=0` is satellite. `index` is the row index of the source halo in `uchuu_catalog.h5`. `Ms` is log10 stellar mass; `Mh` is linear halo mass, matching the galaxy-side convention in the reference pipeline.
 
-### `/halos`
+## `/halos`
 
 ```text
 idx
@@ -201,30 +192,3 @@ vrms
 ```
 
 The halo position/redshift is calculated for the same periodic replica that contains its corresponding galaxy. `/halos[i]` is always the host of `/galaxies[i]`.
-
-## Repository layout
-
-```text
-pyproject.toml
-README.md
-test.py
-examples/
-  data/
-    uchuu/
-    nyu-vagc/
-src/
-  mockgen/
-    __init__.py
-    __main__.py
-    cli.py
-    config.py
-    data.py
-    hod.py
-    lightcone.py
-    models.py
-    output.py
-    pipeline.py
-    properties.py
-```
-
-Runtime code never depends on the repository directory name or on the current working directory. Input/output paths are supplied explicitly.
