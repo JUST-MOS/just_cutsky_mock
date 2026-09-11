@@ -55,11 +55,17 @@ Dependencies:
 Using the following two small-size files for test:
 
 ```text
-examples/data/uchuu/uchuu_catalog.h5
-examples/data/nyu-vagc/all0.dat
+example/data/uchuu/uchuu_catalog.h5
+example/data/nyu-vagc/all0.dat
 ```
 
-Then run:
+Enter:
+
+```text
+example/
+```
+
+And run:
 
 ```bash
 python test.py
