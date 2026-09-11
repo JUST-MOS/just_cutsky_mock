@@ -20,8 +20,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from mockgen import MockConfig, SkyRegion, generate_mock
 
-UCHUU = ROOT / "examples" / "data" / "uchuu" / "uchuu_catalog.h5"
-NYU = ROOT / "examples" / "data" / "nyu-vagc" / "all0.dat"
+UCHUU = ROOT / "example" / "data" / "uchuu" / "uchuu_catalog.h5"
+NYU = ROOT / "example" / "data" / "nyu-vagc" / "all0.dat"
 OUTPUT = ROOT / "test_mock.h5"
 
 if not UCHUU.exists() or not NYU.exists():
