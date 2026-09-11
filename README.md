@@ -45,12 +45,8 @@ halo_vrms
 pip install -e .
 ```
 
-Dependencies:
 
-
-
-
-# Example fro test
+# Example for test
 
 Using the following two small-size files for test:
 
