@@ -19,4 +19,4 @@ dependencies = [
 make-mock = "mockgen.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["py"]
