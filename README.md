@@ -58,44 +58,6 @@ example/test_mock.h5
 ```
 
 
-## Python API
-
-### Center + area
-
-```python
-from just_cutsky_mock import MockConfig, SkyRegion, generate_mock
-
-sky = SkyRegion.centered_area(
-    center_ra=150.0,
-    center_dec=2.0,
-    area_deg2=300.0,
-)
-
-config = MockConfig(
-    uchuu_path="/path/to/uchuu_catalog.h5",
-    output_path="mock.h5",
-    sky=sky,
-    z_min=0.0,
-    z_max=1.0,
-    random_seed=24,
-    n_jobs=-1,
-)
-
-generate_mock(config)
-```
-
-### RA/Dec rectangle
-
-```python
-sky = SkyRegion.rectangle(
-    ra_min=140.0,
-    ra_max=160.0,
-    dec_min=-5.0,
-    dec_max=10.0,
-)
-```
-
-
 ## Output schema
 
 ### `/galaxies`
