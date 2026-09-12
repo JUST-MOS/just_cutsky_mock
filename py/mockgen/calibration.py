@@ -32,7 +32,7 @@ class GalaxyCalibration:
 
 def default_calibration_path() -> Path:
     """Return the calibration table bundled with the installed package."""
-    return Path(files("mockgen").joinpath("data", CALIBRATION_FILENAME))
+    return Path(files("mockgen").joinpath("../", CALIBRATION_FILENAME))
 
 
 def load_calibration(path: str | Path | None = None) -> GalaxyCalibration:
