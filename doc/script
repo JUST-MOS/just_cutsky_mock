@@ -1,1 +1,24 @@
+just_cutsky_mock \
+  --halo /path/to/uchuu_catalog.h5 \
+  --output mock.h5 \
+  --centered-area \
+  --center-ra 150 \
+  --center-dec 2 \
+  --area 300 \
+  --nside 128 \
+  --z-min 0.0 \
+  --z-max 1.0
 
+Rectangle mode:
+
+just_cutsky_mock \
+  --halo /path/to/uchuu_catalog.h5 \
+  --output mock.h5 \
+  --rectangle \
+  --ra-min 140 \
+  --ra-max 160 \
+  --dec-min -5 \
+  --dec-max 10 \
+  --nside 128 \
+  --z-min 0.0 \
+  --z-max 1.0
