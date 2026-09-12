@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 
 
-CALIBRATION_FILENAME = "nyu_vagc_calibration.npz"
+CALIBRATION_FILENAME = "calibration_table.npz"
 
 
 @dataclass(frozen=True)
