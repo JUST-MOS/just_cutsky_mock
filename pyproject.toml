@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mockgen"
-version = "0.2.0"
-description = "Cutsky HOD mock generator"
+name = "just_cutsky_mock"
+version = "1.0"
+description = "JUST Cutsky HOD Mock Generator"
 requires-python = ">=3.10"
 dependencies = [
   "numpy>=1.24",
