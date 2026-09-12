@@ -16,10 +16,10 @@ dependencies = [
 ]
 
 [project.scripts]
-make-mock = "mockgen.cli:main"
+make-mock = "just_cutsky_mock.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["py"]
 
 [tool.setuptools.package-data]
-mockgen = ["data/*.npz"]
+mockgen = ["*.npz"]
