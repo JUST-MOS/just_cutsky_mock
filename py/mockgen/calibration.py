@@ -15,7 +15,7 @@ COLOR_MASS_EDGES = np.append(
     np.linspace(8.0, 12.5001, 21),
 )
 
-CALIBRATION_FILENAME = "nyu_vagc_calibration.npz"
+CALIBRATION_FILENAME = "calibration_table.npz"
 
 
 @dataclass(frozen=True)
