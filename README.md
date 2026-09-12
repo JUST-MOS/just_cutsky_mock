@@ -1,6 +1,6 @@
-# cutsky_mock
+# JUST CUTSKY MOCK (v1.0)
 
-This repository generates one product only: a galaxy lightcone in a requested sky region together with the corresponding host-halo lightcone.
+Generating a galaxy lightcone in a requested sky region together with the corresponding host-halo lightcone.
 
 The runtime scientific input is a single host-halo catalog:
 
