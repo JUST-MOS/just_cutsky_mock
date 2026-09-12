@@ -32,7 +32,7 @@ if not CALIBRATION.exists():
 sky = SkyRegion.centered_area(center_ra=150.0, center_dec=2.0, area_deg2=300.0)
 
 config = MockConfig(
-    uchuu_path=UCHUU,
+    halo_path=UCHUU,
     output_path=OUTPUT,
     sky=sky,
     z_min=0.0,
