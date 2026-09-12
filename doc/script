@@ -1,3 +1,5 @@
+To select a sky region of given area centered on given RA and DEC:
+
 just_cutsky_mock \
   --halo /path/to/uchuu_catalog.h5 \
   --output mock.h5 \
@@ -9,7 +11,7 @@ just_cutsky_mock \
   --z-min 0.0 \
   --z-max 1.0
 
-Rectangle mode:
+To select a sky region with RA_min < RA < RA_max and DEC_min < DEC < DEC_max:
 
 just_cutsky_mock \
   --halo /path/to/uchuu_catalog.h5 \
