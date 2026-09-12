@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "just_cutsky_mock"
 version = "1.0"
-description = "JUST Cutsky HOD Mock Generator"
+description = "Generating JUST Cutsky Lightcone Mock"
 requires-python = ">=3.10"
 dependencies = [
   "numpy>=1.24",
