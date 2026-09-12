@@ -120,7 +120,7 @@ def _angular_separation_deg(ra1, dec1, ra2, dec2):
 
 @dataclass(frozen=True)
 class MockConfig:
-    uchuu_path: Path | str
+    halo_path: Path | str
     output_path: Path | str
     sky: SkyRegion
     z_min: float = 0.0
@@ -131,7 +131,7 @@ class MockConfig:
     hod_chunk_size: int = 500_000
 
     def __post_init__(self):
-        object.__setattr__(self, "uchuu_path", Path(self.uchuu_path).expanduser().resolve())
+        object.__setattr__(self, "halo_path", Path(self.halo_path).expanduser().resolve())
         object.__setattr__(self, "output_path", Path(self.output_path).expanduser().resolve())
         if not (0.0 <= self.z_min < self.z_max):
             raise ValueError("Require 0 <= z_min < z_max.")
