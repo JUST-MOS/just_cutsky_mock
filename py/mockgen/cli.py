@@ -8,8 +8,7 @@ from .pipeline import generate_mock
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Generate a cutsky galaxy + corresponding-host-halo mock.")
-    p.add_argument("--uchuu", required=True, help="Path to uchuu_catalog.h5")
-    p.add_argument("--nyu-vagc", required=True, help="Path to NYU-VAGC all0.dat")
+    p.add_argument("--uchuu", required=True, help="Path to host halo uchuu_catalog.h5")
     p.add_argument("--output", default="mock.h5", help="Output HDF5 path")
     p.add_argument("--z-min", type=float, default=0.0)
     p.add_argument("--z-max", type=float, default=2.4)
@@ -46,7 +45,6 @@ def main(argv=None):
 
     config = MockConfig(
         uchuu_path=args.uchuu,
-        nyu_vagc_path=args.nyu_vagc,
         output_path=args.output,
         sky=sky,
         z_min=args.z_min,

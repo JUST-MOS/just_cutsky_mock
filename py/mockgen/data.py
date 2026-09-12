@@ -22,18 +22,6 @@ class HaloBox:
 
 
 @dataclass
-class ObservationalSample:
-    z: np.ndarray
-    Mr: np.ndarray
-    gr: np.ndarray
-    Ms: np.ndarray
-    z_mag: np.ndarray
-    Mr_mag: np.ndarray
-    gr_mag: np.ndarray
-    Ms_mag: np.ndarray
-
-
-@dataclass
 class GalaxyBox:
     Ms: np.ndarray              # log10 stellar mass
     Mh: np.ndarray              # host halo mass, linear
@@ -63,19 +51,15 @@ UCHUU_REQUIRED_FIELDS = (
 
 
 def load_uchuu_catalog(path: str | Path) -> HaloBox:
-    """Load the fixed Uchuu schema used by this project.
-
-    The raw HDF5 dataset names are intentionally isolated in this function so
-    the physical pipeline never depends directly on them.
-    """
+    """Load the fixed host-halo input schema used by the pipeline."""
     path = Path(path)
     if not path.exists():
-        raise FileNotFoundError(f"Uchuu catalog not found: {path}")
+        raise FileNotFoundError(f"Host halo catalog not found: {path}")
 
     with h5py.File(path, "r") as f:
         missing = [name for name in UCHUU_REQUIRED_FIELDS if name not in f]
         if missing:
-            raise KeyError(f"Missing required Uchuu datasets: {missing}")
+            raise KeyError(f"Missing required host-halo datasets: {missing}")
 
         mass = f["halo_mass"][:]
         conc = f["halo_conc"][:]
@@ -85,7 +69,7 @@ def load_uchuu_catalog(path: str | Path) -> HaloBox:
 
     n = len(mass)
     if not (len(conc) == len(pos) == len(vel) == len(vrms) == n):
-        raise ValueError("Inconsistent array lengths in Uchuu catalog.")
+        raise ValueError("Inconsistent array lengths in host halo catalog.")
 
     return HaloBox(
         mass=np.asarray(mass),
@@ -94,67 +78,4 @@ def load_uchuu_catalog(path: str | Path) -> HaloBox:
         vel=np.asarray(vel),
         vrms=np.asarray(vrms),
         index=np.arange(n, dtype=np.int64),
-    )
-
-
-def stellar_mass_limit(z):
-    return 5.4 * np.maximum(np.asarray(z) - 0.025, 0.0) ** 0.33 + 8.0
-
-
-def vlim(lgMs):
-    lgMs = np.asarray(lgMs)
-    return np.where(lgMs > 8.0, ((lgMs - 8.0) / 5.4) ** (1.0 / 0.33) + 0.025, 0.025)
-
-
-def load_nyu_vagc(path: str | Path) -> ObservationalSample:
-    """Load the fixed NYU-VAGC ``all0.dat`` column convention.
-
-    Columns used by the original implementation:
-      3 -> redshift
-      4 -> Mr
-      7 -> g-r
-      8 -> log10 stellar mass
-    """
-    path = Path(path)
-    if not path.exists():
-        raise FileNotFoundError(f"NYU-VAGC file not found: {path}")
-
-    all0 = np.loadtxt(path)
-    if all0.ndim != 2 or all0.shape[1] <= 8:
-        raise ValueError("all0.dat must contain at least 9 columns.")
-
-    z = all0[:, 3]
-    Mr = all0[:, 4]
-    gr = all0[:, 7]
-    Ms = all0[:, 8]
-
-    mask = (
-        np.isfinite(Mr)
-        & np.isfinite(gr)
-        & np.isfinite(Ms)
-        & (z > 0.01)
-        & ((Ms <= 8.0) | (Ms > stellar_mass_limit(z)))
-    )
-    z, Mr, gr, Ms = z[mask], Mr[mask], gr[mask], Ms[mask]
-
-    zlo, zhi = 0.08, 0.12
-    mask_mag = (
-        np.isfinite(Mr)
-        & np.isfinite(gr)
-        & np.isfinite(Ms)
-        & (z > zlo)
-        & (z < zhi)
-        & (Ms > stellar_mass_limit(zhi))
-        & (Ms < 12.0)
-    )
-
-    return ObservationalSample(
-        z=z,
-        Mr=Mr,
-        gr=gr,
-        Ms=Ms,
-        z_mag=z[mask_mag],
-        Mr_mag=Mr[mask_mag],
-        gr_mag=gr[mask_mag],
-        Ms_mag=Ms[mask_mag],
     )
