@@ -8,9 +8,8 @@ Resulting in a single HDF5 file:
 mock.h5
 ├── /galaxies
 └── /halos
+└── /geometry
 ```
-
-Every row in `/halos` matches the same row in `/galaxies`. A host halo is repeated when several output galaxies share it.
 
 
 ## Host halo input schema
@@ -104,3 +103,13 @@ Mh
 conc
 vrms
 ```
+
+Each row in `/halos` corresponds to the host halo of the same row in `/galaxies`.
+
+### `/geometry`
+
+```text
+pixels
+```
+
+The selected RING-ordered HEALPix pixel numbers.
