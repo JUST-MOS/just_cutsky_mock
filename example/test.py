@@ -18,10 +18,10 @@ import h5py
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "py"))
 
-from mockgen import MockConfig, SkyRegion, generate_mock
+from just_cutsky_mock import MockConfig, SkyRegion, generate_mock
 
-UCHUU = ROOT / "example" / "data" / "uchuu" / "uchuu_catalog.h5"
-CALIBRATION = ROOT / "py" / "mockgen" / "data" / "nyu_vagc_calibration.npz"
+UCHUU = ROOT / "example" / "data" / "uchuu" / "uchuu_catalog_mini.h5"
+CALIBRATION = ROOT / "py" / "just_cutsky_mock" / "data" / "calibration_table.npz"
 OUTPUT = ROOT / "example" / "test_mock.h5"
 
 if not UCHUU.exists():
