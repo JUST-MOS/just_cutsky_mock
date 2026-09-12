@@ -28,7 +28,7 @@ def generate_mock(config: MockConfig) -> MockResult:
     start = time.time()
 
     print("[1/6] Loading host halo catalog...")
-    halos = load_uchuu_catalog(config.uchuu_path)
+    halos = load_uchuu_catalog(config.halo_path)
     print(f"      {halos.size:,} halos")
 
     print("[2/6] Populating the periodic box with the fixed HOD model...")
