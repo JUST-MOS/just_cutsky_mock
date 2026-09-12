@@ -8,7 +8,7 @@ from .pipeline import generate_mock
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Generate a HEALPix cutsky galaxy + corresponding-host-halo mock.")
-    p.add_argument("--uchuu", required=True, help="Path to host halo uchuu_catalog.h5")
+    p.add_argument("--halo", required=True, help="Path to host halo catalog h5")
     p.add_argument("--output", default="mock.h5", help="Output HDF5 path")
     p.add_argument("--z-min", type=float, default=0.0)
     p.add_argument("--z-max", type=float, default=2.4)
@@ -45,7 +45,7 @@ def main(argv=None):
         sky = SkyRegion.rectangle(args.ra_min, args.ra_max, args.dec_min, args.dec_max)
 
     config = MockConfig(
-        uchuu_path=args.uchuu,
+        halo_path=args.halo,
         output_path=args.output,
         sky=sky,
         z_min=args.z_min,
