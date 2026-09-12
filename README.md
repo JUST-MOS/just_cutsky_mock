@@ -63,7 +63,7 @@ example/test_mock.h5
 ### Center + area
 
 ```python
-from mockgen import MockConfig, SkyRegion, generate_mock
+from just_cutsky_mock import MockConfig, SkyRegion, generate_mock
 
 sky = SkyRegion.centered_area(
     center_ra=150.0,
