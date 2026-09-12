@@ -42,7 +42,7 @@ pip install -e .
 The mini halo catalog file:
 
 ```text
-example/data/uchuu/uchuu_catalog.h5
+example/data/uchuu/uchuu_catalog_mini.h5
 ```
 
 Then run:
@@ -142,5 +142,3 @@ Mh
 conc
 vrms
 ```
-
-`/halos[i]` is always the host of `/galaxies[i]`, in the same periodic replica.
