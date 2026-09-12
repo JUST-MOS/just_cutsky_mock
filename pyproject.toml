@@ -22,4 +22,4 @@ make-mock = "just_cutsky_mock.cli:main"
 where = ["py"]
 
 [tool.setuptools.package-data]
-mockgen = ["*.npz"]
+mockgen = ["data/*.npz"]
