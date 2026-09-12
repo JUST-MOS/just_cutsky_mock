@@ -12,7 +12,7 @@ mock.h5
 ```
 
 
-## Host halo input schema
+## Host halo input structure
 
 The fixed input datasets are:
 
@@ -57,7 +57,7 @@ example/test_mock.h5
 ```
 
 
-## Output schema
+## Output structure
 
 ### `/galaxies`
 
