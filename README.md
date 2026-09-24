@@ -2,32 +2,16 @@
 
 Generating a galaxy light-cone for a requested sky region with the corresponding host-halo light-cone.
 
-Resulting in a single HDF5 file:
-
-```text
-mock.h5
-├── /galaxies
-└── /halos
-└── /geometry
-```
-
-
 ## Host halo input structure
 
-The fixed input datasets are:
+The input datasets in h5 File should be:
 
 ```text
 halo_mass
 halo_conc
-halo_x
-halo_y
-halo_z
-halo_vx
-halo_vy
-halo_vz
-halo_vrms
+halo_x, halo_y, halo_z
+halo_vx, halo_vy, halo_vz, halo_vrms
 ```
-
 
 ## Install
 
@@ -35,16 +19,15 @@ halo_vrms
 pip install -e .
 ```
 
-
 ## Example
 
-The mini halo catalog file:
+There is a mini halo catalog file in:
 
 ```text
 example/data/uchuu/uchuu_catalog_mini.h5
 ```
 
-Then run:
+Run:
 
 ```bash
 python example/test.py
@@ -56,10 +39,18 @@ Which will result in:
 example/test_mock.h5
 ```
 
-
 ## Output structure
 
-### `/galaxies`
+The output is a h5 file:
+
+```text
+mock.h5
+├── /galaxies
+└── /halos
+└── /geometry
+```
+
+### `/galaxies` dataset
 
 ```text
 idx
@@ -84,7 +75,7 @@ gr
 
 `type=1` is central and `type=0` is satellite. `index` is the row index of the source host halo in the input halo catalog. `Ms` is log10 stellar mass and `Mh` is linear host halo mass.
 
-### `/halos`
+### `/halos` dataset
 
 ```text
 idx
@@ -106,7 +97,7 @@ vrms
 
 Each row in `/halos` corresponds to the host halo of the same row in `/galaxies`.
 
-### `/geometry`
+### `/geometry` dataset
 
 ```text
 pixels
