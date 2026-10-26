@@ -1,0 +1,26 @@
+To select a sky region of given area centered on given RA and DEC:
+
+just_cutsky_mock \
+  --halo example/data/uchuu/uchuu_catalog_mini.h5 \
+  --output example/test_mock.h5 \
+  --centered-area \
+  --center-ra 150 \
+  --center-dec 2 \
+  --area 300 \
+  --nside 128 \
+  --z-min 0.0 \
+  --z-max 1.0
+
+To select a sky region with RA_min < RA < RA_max and DEC_min < DEC < DEC_max:
+
+just_cutsky_mock \
+  --halo example/data/uchuu/uchuu_catalog_mini.h5 \
+  --output example/test_mock.h5 \
+  --rectangle \
+  --ra-min 140 \
+  --ra-max 160 \
+  --dec-min -5 \
+  --dec-max 10 \
+  --nside 128 \
+  --z-min 0.0 \
+  --z-max 1.0
