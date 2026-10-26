@@ -14,7 +14,7 @@ pixels, nside, ordering = read_healpix(mock_path)
 footprint_mask = make_healpix_mask(pixels, nside)
 
 with h5py.File(mock_path, "r") as f:
-    galaxy_ra = f["galaxies/ra"][:]
-    galaxy_dec = f["galaxies/dec"][:]
+    galaxy_ra = f["galaxies/GAL_RA"][:]
+    galaxy_dec = f["galaxies/GAL_DEC"][:]
 
 plot_sky(galaxy_ra, galaxy_dec, clusters["ra"], clusters["dec"], footprint_mask)
