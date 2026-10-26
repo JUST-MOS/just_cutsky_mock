@@ -17,4 +17,4 @@ with h5py.File(mock_path, "r") as f:
     galaxy_ra = f["galaxies/GAL_RA"][:]
     galaxy_dec = f["galaxies/GAL_DEC"][:]
 
-plot_sky(galaxy_ra, galaxy_dec, clusters["ra"], clusters["dec"], footprint_mask)
+plot_sky(galaxy_ra, galaxy_dec, clusters["HALO_RA"], clusters["HALO_DEC"], footprint_mask)
