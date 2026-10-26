@@ -8,6 +8,7 @@ from just_cutsky_mock.geometry import HealpixGeometry
 
 
 def select_mock(path, sky, nside):
+    # define healpix pixels for the targeted sky region
     geometry = HealpixGeometry.from_sky_region(sky, nside)
     pixels = geometry.pixels
     with h5py.File(path, "r") as f:
