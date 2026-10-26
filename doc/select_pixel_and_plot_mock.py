@@ -11,14 +11,15 @@ def select_mock(path, sky, nside):
     geometry = HealpixGeometry.from_sky_region(sky, nside)
     pixels = geometry.pixels
     with h5py.File(path, "r") as f:
-        mask = geometry.contains(f["galaxies/ra"][:], f["galaxies/dec"][:])
-        galaxies = {name: f["galaxies"][name][:][mask] for name in f["galaxies"]}
-        halos = {name: f["halos"][name][:][mask] for name in f["halos"]}
+        mask = geometry.contains(f["GAL_RA"][:], f["GAL_DEC"][:])
+        halo_mask = (f["GAL_IS_CENTRAL"][:] == 1)
+        galaxies = {name: f[name][:][mask] for name in ["GAL_RA", "GAL_DEC", "GAL_IS_CENTRAL"]}
+        halos = {name: f[name][:][(mask & halo_mask)] for name in f["GAL_RA", "GAL_DEC", "HALO_M200m"]}
     return pixels, galaxies, halos
 
 
-def find_clusters(galaxies, halos, mass_cut):
-    mask = (galaxies["type"] == 1) & (halos["Mh"] >= mass_cut)
+def find_clusters(halos, mass_cut):
+    mask = (halos["HALO_M200m"] >= mass_cut)
     clusters = {name: halos[name][mask] for name in halos}
     return clusters
 
@@ -28,21 +29,20 @@ def plot_mock(galaxies, clusters, pixels, nside, title=""):
     footprint[pixels] = 1.0
     hp.mollview(footprint, min=0.0, max=1.0, cmap="Greys", cbar=False, title=title)
     hp.graticule()
-    hp.projscatter(galaxies["ra"], galaxies["dec"], lonlat=True, s=1, alpha=0.5, label="Galaxies")
-    hp.projscatter(clusters["ra"], clusters["dec"], lonlat=True, s=20, marker="o", label="Clusters")
+    hp.projscatter(galaxies["GAL_RA"], galaxies["GAL_DEC"], lonlat=True, s=1, alpha=0.5, label="Galaxies")
+    hp.projscatter(clusters["GAL_RA"], clusters["GAL_DEC"], lonlat=True, s=20, marker="o", label="Clusters")
     plt.legend()
     plt.show()
 
 
-mock_path = "mock.h5"
+mock_path = "/home/hjunyu/Just/Mock/mocks/mock.h5" # file path on Gravity
 nside = 128
-mass_cut = 1e14
+mass_cut = 1e13
 
-circle_sky = SkyRegion.centered_area(center_ra=150.0, center_dec=2.0, area_deg2=300.0)
-rectangle_sky = SkyRegion.rectangle(ra_min=140.0, ra_max=160.0, dec_min=-5.0, dec_max=5.0)
-
-sky = circle_sky
+# circle_sky = SkyRegion.centered_area(center_ra=45.0, center_dec=45.0, area_deg2=10.0)
+# rectangle_sky = SkyRegion.rectangle(ra_min=44.0, ra_max=46.0, dec_min=44.0, dec_max=46.0)
+# sky = circle_sky or rectangle_sky
 
 pixels, galaxies, halos = select_mock(mock_path, sky, nside)
-clusters = find_clusters(galaxies, halos, mass_cut)
+clusters = find_clusters(halos, mass_cut)
 plot_mock(galaxies, clusters, pixels, nside)
