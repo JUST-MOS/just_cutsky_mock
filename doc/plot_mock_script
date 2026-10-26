@@ -1,0 +1,20 @@
+# To read the cluster, healpix information and plot them:
+
+import h5py
+
+from just_cutsky_mock.find_cluster import read_clusters
+from just_cutsky_mock.define_healpix import read_healpix, make_healpix_mask
+from plot_mock import plot_sky
+
+mock_path = "../example/test_mock.h5"
+mass_cut = 1e13
+
+clusters = read_clusters(mock_path, mass_cut)
+pixels, nside, ordering = read_healpix(mock_path)
+footprint_mask = make_healpix_mask(pixels, nside)
+
+with h5py.File(mock_path, "r") as f:
+    galaxy_ra = f["galaxies/ra"][:]
+    galaxy_dec = f["galaxies/dec"][:]
+
+plot_sky(galaxy_ra, galaxy_dec, clusters["ra"], clusters["dec"], footprint_mask)
