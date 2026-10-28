@@ -10,6 +10,7 @@ from .geometry import HealpixGeometry
 
 
 GALAXY_FIELDS = {
+    "idx": "idx",
     "index": "index",
     "type": "GAL_IS_CENTRAL",
     "ra": "GAL_RA",
@@ -30,6 +31,7 @@ GALAXY_FIELDS = {
 }
 
 HALO_FIELDS = {
+    "idx": "idx",
     "index": "index",
     "ra": "HALO_RA",
     "dec": "HALO_DEC",
@@ -51,6 +53,7 @@ GEOMETRY_FIELDS = {
 }
 
 FIELD_ATTRS = {
+    "idx": {"description": "A unique identifier for each galaxy/halo."}
     "index": {"description": "Row index of the source halo in uchuu_catalog.h5."},
     "IS_CENTRAL": {"description": "Galaxy type: 1 central, 0 satellite."},
     "RA": {"unit": "deg"},
