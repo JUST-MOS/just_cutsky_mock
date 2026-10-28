@@ -38,7 +38,7 @@ HALO_FIELDS = {
     "z": "HALO_Z",
     "vx": "HALO_VX",
     "vy": "HALO_VY",
-    "vz": ""HALO_VZ,
+    "vz": "HALO_VZ",
     "z_obs": "Z_OBS",
     "z_com": "Z_COM",
     "Mh": "HALO_M200m",
