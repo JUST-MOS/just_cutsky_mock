@@ -1,3 +1,5 @@
+# The aim of this script is to 
+
 import h5py
 import numpy as np
 import healpy as hp
