@@ -1,4 +1,4 @@
-# The aim of this script is to generate a mini galaxy mock called "uchuu_mini_mock.h5" in the "example/mock" directory
+# The aim of this script is to generate a mini galaxy mock called "uchuu_mini_mock.h5" in the "example" directory
 # This script will use the "example/simulation/uchuu_mini.h5" host halo catalog to generate the mock
 # Mention: "example/simulation/uchuu_mini.h5" is not the complete Uchuu host halo catalog, 
 # due to the large size of Uchuu, this file only contains a small subset of the complete catalog, the file size is about 15MB
@@ -14,7 +14,7 @@ from just_cutsky_mock import MockConfig, SkyRegion, generate_mock
 
 UCHUU = ROOT / "example" / "simulaion" / "uchuu_mini.h5"
 CALIBRATION = ROOT / "py" / "just_cutsky_mock" / "data" / "calibration_table.npz"
-OUTPUT = ROOT / "example" / "mock" / "uchuu_mini_mock.h5"
+OUTPUT = ROOT / "example" / "uchuu_mini_mock.h5"
 
 if not UCHUU.exists():
     raise FileNotFoundError(f"Example host halo catalog is missing:\n  {UCHUU}")
