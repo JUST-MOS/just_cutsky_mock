@@ -27,7 +27,7 @@ def plot_hp(footprint_mask, title="Healpix Mask of Galaxy Mock"):
     hp.graticule()
     plt.show()
 
-def plot_gal(galaxy_ra, galaxy_dec, cluster_ra, cluster_dec, footprint_mask, title="Galaxies and Clusters", galaxy_size=1, cluster_size=10):
+def plot_gal(galaxy_ra, galaxy_dec, cluster_ra, cluster_dec, footprint_mask, title=fr"All Galaxies and Clusters with $\log M_h > {np.round(np.log10(mass_cut), 0)}$", galaxy_size=1, cluster_size=10):
     footprint = np.full(len(footprint_mask), hp.UNSEEN)
     footprint[footprint_mask] = 1.0
     hp.mollview(footprint, min=0.0, max=1.0, cmap="Greys", cbar=False, title=title)
