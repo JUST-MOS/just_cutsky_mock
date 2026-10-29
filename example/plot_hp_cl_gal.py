@@ -20,7 +20,14 @@ with h5py.File(mock_path, "r") as f:
     galaxy_ra = f["galaxies/GAL_RA"][:]
     galaxy_dec = f["galaxies/GAL_DEC"][:]
 
-def plot_sky(galaxy_ra, galaxy_dec, cluster_ra, cluster_dec, footprint_mask, title="", galaxy_size=1, cluster_size=20):
+def plot_hp(footprint_mask, title="Healpix Mask of Galaxy Mock"):
+    footprint = np.full(len(footprint_mask), hp.UNSEEN)
+    footprint[footprint_mask] = 1.0
+    hp.mollview(footprint, min=0.0, max=1.0, cmap="Greys", cbar=False, title=title)
+    hp.graticule()
+    plt.show()
+
+def plot_gal(galaxy_ra, galaxy_dec, cluster_ra, cluster_dec, footprint_mask, title="Galaxies and Clusters", galaxy_size=1, cluster_size=10):
     footprint = np.full(len(footprint_mask), hp.UNSEEN)
     footprint[footprint_mask] = 1.0
     hp.mollview(footprint, min=0.0, max=1.0, cmap="Greys", cbar=False, title=title)
@@ -30,4 +37,5 @@ def plot_sky(galaxy_ra, galaxy_dec, cluster_ra, cluster_dec, footprint_mask, tit
     plt.legend()
     plt.show()
 
-plot_sky(galaxy_ra, galaxy_dec, clusters["HALO_RA"], clusters["HALO_DEC"], footprint_mask)
+plot_hp(footprint_mask, title="Healpix Mask of Galaxy Mock")
+plot_gal(galaxy_ra, galaxy_dec, clusters["HALO_RA"], clusters["HALO_DEC"], footprint_mask)
