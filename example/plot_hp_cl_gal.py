@@ -1,5 +1,5 @@
 # The aim of this script is to:
-# 1. select clusters from the galaxy mock generated with "generate_mock.py", which is saved in "example/mock_uchuu_mini_mock.h5"
+# 1. select clusters from the galaxy mock generated with "generate_mock.py", which is saved in "example/uchuu_mini_mock.h5"
 # 2. plot the clusters, galaxies in the mock and the healpix mask describing this galaxy mock
 
 import h5py
@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from just_cutsky_mock.find_cluster import read_clusters
 from just_cutsky_mock.define_healpix import read_healpix, make_healpix_mask
 
-mock_path = "mock/uchuu_mini_mock.h5"
+mock_path = "uchuu_mini_mock.h5"
 mass_cut = 1e13
 
 clusters = read_clusters(mock_path, mass_cut)
