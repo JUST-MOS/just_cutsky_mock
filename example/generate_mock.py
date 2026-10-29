@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / "py"))
 
 from just_cutsky_mock import MockConfig, SkyRegion, generate_mock
 
-UCHUU = ROOT / "example" / "simulaion" / "uchuu_mini.h5"
+UCHUU = ROOT / "example" / "simulation" / "uchuu_mini.h5"
 CALIBRATION = ROOT / "py" / "just_cutsky_mock" / "data" / "calibration_table.npz"
 OUTPUT = ROOT / "example" / "uchuu_mini_mock.h5"
 
